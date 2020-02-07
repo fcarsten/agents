@@ -42,13 +42,15 @@ def get_tf_env(environment):
   return tf_env
 
 
-def validate_py_environment(environment, episodes=5):
+def validate_py_environment(environment, episodes=5,
+                            observation_and_action_constraint_splitter=None):
   """Validates the environment follows the defined specs."""
   time_step_spec = environment.time_step_spec()
   action_spec = environment.action_spec()
 
   random_policy = random_py_policy.RandomPyPolicy(
-      time_step_spec=time_step_spec, action_spec=action_spec)
+      time_step_spec=time_step_spec, action_spec=action_spec,
+      observation_and_action_constraint_splitter=observation_and_action_constraint_splitter)
 
   episode_count = 0
   time_step = environment.reset()
